@@ -1,0 +1,132 @@
+/* Add these new rules */
+.sidebar {
+  position: fixed;
+  z-index: 1000; /* Higher than overlay */
+  transition: transform 0.3s ease, width 0.3s ease; /* Combine transitions */
+  transform: translateX(0);
+}
+
+.sidebar.collapsed {
+  transform: translateX(-100%);
+  width: 256px; /* Maintain original width */
+}
+
+/* Add overlay styling */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 256px; /* Start from sidebar edge */
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 999; /* Below sidebar */
+  transition: opacity 0.3s ease;
+}
+
+/* Modified existing rules to maintain your design */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 256px;
+  background-color: #181818;
+  color: #ffffff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-right: 3px solid #ee10b0;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+  transform: translateX(0); /* Reset transform */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+/* Keep all other existing rules the same */
+.hamburger-icon {
+  background-color: transparent;
+  color: #ee10b0;
+  border: none;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: color 0.2s ease;
+}
+
+.hamburger-icon:hover {
+  color: #f542aa;
+}
+
+.logo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logoIcon {
+  font-size: 32px;
+  color: #ee10b0;
+}
+
+.logoText {
+  font-size: 16px;
+  color: white;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #0e9eef;
+}
+
+.nav-link.active {
+  background-color: #ee10b0;
+}
+
+.nav-icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.nav-link span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.collapsed .nav-link span {
+  display: none;
+}
+
+.logout {
+  color: #ee10b0;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ffffff;
+  margin: 10px 0;
+}

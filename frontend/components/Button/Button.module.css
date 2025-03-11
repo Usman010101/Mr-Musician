@@ -1,0 +1,16 @@
+/* Button.module.css */
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-color: #EE10B0; /* Original pink */
+    color: white;
+  }
+  
+  .button:hover {
+    background-color: #D1008D; /* Darker pink for hover */
+  }
+  

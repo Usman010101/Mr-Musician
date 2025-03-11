@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #181818;
+}
+
+/* Search Group */
+.searchGroup {
+    max-width: 300px; /* Ensures the search bar stays within a specific width */
+    flex-grow: 2;
+}
+
+.searchIcon {
+    background-color: #181818 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 0.5rem;
+}
+
+.searchInput {
+    background-color: #181818 !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 0.5rem;
+    font-size: 14px;
+}
+
+.searchInput::placeholder {
+    color: #cccccc; /* Light gray for placeholder text */
+}
+
+.navbar {
+    background-color: transparent !important;
+    box-shadow: none; /* Remove shadow */
+    z-index: 10; /* Ensure it stays above the background image */
+}

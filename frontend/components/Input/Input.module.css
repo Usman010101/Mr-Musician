@@ -1,0 +1,29 @@
+.input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: transparent; /* Make it transparent */
+    border: 1px solid #ccc; /* Optional: Add border */
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%; /* Adjust width as needed */
+  }
+  
+  .input-field {
+    flex: 1; /* Take up the remaining space */
+    background: transparent; /* Transparent background */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline on focus */
+    color: #fff; /* White text color */
+  }
+  
+  .input-field::placeholder {
+    color: #aaa; /* Placeholder color */
+  }
+  
+  .icon {
+    color: #fff; /* White icon color */
+    margin-right: 10px; /* Space between icon and input */
+    font-size: 18px; /* Adjust icon size */
+  }
+  

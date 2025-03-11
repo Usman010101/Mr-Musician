@@ -1,0 +1,10 @@
+.logo {
+  font-size: 28px;          /* Adjust font size */
+  font-weight: bold;        /* Make the text bold */
+  background: linear-gradient(to right, #EE10B0, #0E9EEF); /* Apply the gradient */
+  -webkit-background-clip: text; /* Clip the background to the text (for webkit browsers) */
+  background-clip: text;    /* Apply background-clip for other browsers */
+  color: transparent;       /* Make the text color transparent */
+  display: inline-block;    /* Ensure the text stays inline */
+  filter: brightness(1.5);  /* Adjust brightness to make it brighter */
+}

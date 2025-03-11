@@ -1,0 +1,53 @@
+.header {
+    background: linear-gradient(to right, #1e3c72, #2a5298);
+    padding: 2rem;
+    border-radius: 1rem;
+  }
+  
+  .cover {
+    width: 200px;
+    height: 200px;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mix {
+    color: #ff1493;
+  }
+  
+  .description {
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+  }
+  
+  .info {
+    color: #fff;
+  }
+  
+  .dot {
+    color: #fff;
+    margin: 0 1rem;
+  }
+  
+  .playButton {
+    background-color: #ff1493;
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    padding: 0.75rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s;
+  }
+  
+  .playButton:hover {
+    background-color: #ff0080;
+  }
