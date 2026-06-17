@@ -1,0 +1,278 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+  }
+  
+  .mainContent {
+    flex: 1;
+    padding: 2rem;
+    margin-left: 250px; /* Match sidebar width */
+    transition: margin-left 0.3s;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .header p {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .card h2 {
+    font-size: 1.1rem;
+    color: #2d2d2d;
+    margin-bottom: 1.2rem;
+  }
+  
+  /* Chart Styles */
+  .chartWrapper {
+    padding: 1rem 0;
+  }
+  
+  .barChart {
+    display: flex;
+    height: 200px;
+    align-items: flex-end;
+    gap: 2%;
+    padding: 0 1rem;
+  }
+  
+  .bar {
+    width: 8%;
+    background: #4a90e2;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.3s ease;
+  }
+  
+  .monthLabels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    color: #666;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* List Styles */
+  .statsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .statsList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+  }
+  
+  .statsList li:last-child {
+    border-bottom: none;
+  }
+  
+  .bulletList {
+    list-style: disc;
+    padding-left: 1.5rem;
+    font-size: 0.9rem;
+    color: #444;
+  }
+  
+  .bulletList li {
+    padding: 0.3rem 0;
+  }
+  
+  /* Grid Layouts */
+  .grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .gridTriple {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  .container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #181818;
+    color: #ffffff;
+  }
+  
+  .mainContent {
+    flex: 1;
+    padding: 2rem;
+    margin-left: 250px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 4rem;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #ee10b0, #ff7ad7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .subtitle {
+    color: #a0a0a0;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .card {
+    background: #222222;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .cardTitle {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #ee10b0;
+  }
+  
+  .chartWrapper {
+    padding: 1.5rem 0;
+  }
+  
+  .barChart {
+    display: flex;
+    height: 250px;
+    align-items: flex-end;
+    gap: 2%;
+    padding: 0 1rem;
+  }
+  
+  .bar {
+    width: 8%;
+    background: linear-gradient(180deg, #ee10b0, #ff69d4);
+    border-radius: 6px 6px 0 0;
+    transition: all 0.3s ease;
+  }
+  
+  .bar:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+  
+  .monthLabels {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    color: #888888;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+  }
+  
+  .statsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .statsList li {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #333333;
+    font-size: 0.95rem;
+  }
+  
+  .statsList li:last-child {
+    border-bottom: none;
+  }
+  
+  .statsList span:last-child {
+    color: #ee10b0;
+    font-weight: 500;
+  }
+  
+  .bulletList {
+    list-style: none;
+    padding-left: 1.2rem;
+  }
+  
+  .bulletList li {
+    padding: 0.8rem 0;
+    position: relative;
+    color: #cccccc;
+  }
+  
+  .bulletList li::before {
+    content: "•";
+    color: #ee10b0;
+    position: absolute;
+    left: -1.2rem;
+    font-size: 1.2rem;
+  }
+  
+  .gridContainer {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  @media (max-width: 768px) {
+    .mainContent {
+      padding: 2rem 1rem;
+      margin-left: 0;
+    }
+    
+    .header h1 {
+      font-size: 2rem;
+    }
+    
+    .card {
+      padding: 1.5rem;
+    }
+    
+    .gridContainer {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .mainContent {
+      margin-left: 0;
+      padding: 1rem;
+    }
+    
+    .gridTriple {
+      grid-template-columns: 1fr;
+    }
+  }
