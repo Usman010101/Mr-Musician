@@ -1,0 +1,261 @@
+  .profileContainer {
+      background-color: #181818;
+      color: #ffffff;
+      min-height: 100vh;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .artistHeader {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: #222222;
+      border-radius: 15px;
+    }
+    
+    .profileImage {
+      flex-shrink: 0;
+    }
+    
+    .imagePlaceholder {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #ee10b0;
+      box-shadow: 0 0 30px rgba(238, 16, 176, 0.4);
+    }
+    
+    .artistInfo {
+      flex-grow: 1;
+    }
+    
+    .artistName {
+      font-size: 2.5rem;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+    }
+    
+    .statsContainer {
+      display: flex;
+      gap: 4rem;
+    }
+    
+    .statItem {
+      text-align: center;
+    }
+    
+    .statIcon {
+      font-size: 1.8rem;
+      color: #ee10b0;
+      margin-bottom: 0.5rem;
+    }
+    
+    .statNumber {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    
+    .statLabel {
+      color: #aaaaaa;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .songsTable {
+      background: #222222;
+      border-radius: 15px;
+      padding: 1rem;
+    }
+    
+    .tableHeader {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr 1fr;
+      padding: 1rem;
+      border-bottom: 2px solid #ee10b0;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ee10b0;
+    }
+    
+    .tableRow {
+      display: grid;
+      grid-template-columns: 4fr 1fr 1fr 1fr;
+      align-items: center;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      background: #2a2a2a;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+    }
+    
+    .tableRow:hover {
+      transform: translateX(10px);
+    }
+    
+    .trackInfo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .songThumbnail {
+      width: 50px;
+      height: 50px;
+      background: #ee10b0;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+    
+    .songName {
+      font-weight: 500;
+    }
+    
+    .views, .likes {
+      font-weight: bold;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+    
+    .deleteButton, .editButton {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 5px;
+      transition: all 0.2s ease;
+    }
+    
+    .deleteButton {
+      color: #ff4d4d;
+    }
+    
+    .deleteButton:hover {
+      background: rgba(255, 77, 77, 0.1);
+    }
+    
+    .editButton {
+      color: #ee10b0;
+    }
+    
+    .editButton:hover {
+      background: rgba(238, 16, 176, 0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .artistHeader {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+    
+      .statsContainer {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    
+      .tableHeader {
+        display: none;
+      }
+    
+      .tableRow {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1.5rem;
+      }
+    
+      .trackInfo {
+        justify-content: center;
+      }
+    
+      .views, .likes {
+        text-align: center;
+      }
+    
+      .actions {
+        justify-content: center;
+      }
+    }
+
+   /* Add to your Profile.module.css */
+
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 2rem;
+}
+
+.btn-switch {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 0.75rem 2rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-switch:hover {
+  color: #ee10b0;
+}
+
+.btn-switch.active {
+  color: #ee10b0;
+}
+
+.btn-switch.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: #ee10b0;
+  border-radius: 3px;
+  animation: switchUnderline 0.3s ease;
+}
+
+@keyframes switchUnderline {
+  from { width: 0 }
+  to { width: 60% }
+}
+
+/* For a more premium look */
+.btn-switch {
+  border-radius: 30px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-switch:hover:not(.active) {
+  background: rgba(238, 16, 176, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-switch:active {
+  transform: translateY(0);
+}
+    
+
+    

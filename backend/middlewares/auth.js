@@ -1,7 +1,11 @@
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization?.split(" ")[1];
+
+  console.log("cookies:", req.cookies); // Log all cookies
+    const token = req.cookies.token
     console.log("Received Token:", token); // Log received token
   
     if (!token) {
@@ -9,9 +13,16 @@ export const verifyToken = (req, res, next) => {
     }
   
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      console.log("JWT_SECRET:", process.env.JWT_SECRET_KEY); // Check if secret is loaded
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
       console.log("Decoded Token:", decoded); // Log decoded token
-      req.artistId = decoded.userId; // Corrected key for user ID
+
+      if (decoded.userType==='artist'){
+        req.artistId = decoded.userId; // Corrected key for user ID
+      }else if (decoded.userType==='listener'){
+        req.listenerId = decoded.userId; // Corrected key for user ID
+      }
+      console.log("User ID:", req.artistId); // Log user ID
       next();
     } catch (err) {
       console.error("Token Verification Error:", err.message); // Log error

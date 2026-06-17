@@ -1,0 +1,151 @@
+/* TextToSpeech.module.css */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: #1a1a1a;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+  text-align: center;
+  color: #ee10b0;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(255, 107, 158, 0.3);
+}
+
+.section {
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background: #2a2a2a;
+  border-radius: 12px;
+  border: 1px solid #3a3a3a;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 107, 158, 0.2);
+}
+
+.sectionTitle {
+  margin-top: 0;
+  color: #ee10b0;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid #3a3a3a;
+  border-radius: 8px;
+  resize: vertical;
+  min-height: 150px;
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  transition: border-color 0.3s ease;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #ee10b0;
+}
+
+.options {
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.options label {
+  color: #d0d0d0;
+  font-size: 1rem;
+}
+
+.select {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 2px solid #3a3a3a;
+  background: #2a2a2a;
+  color: #f0f0f0;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.select:focus {
+  outline: none;
+  border-color: #ee10b0;
+  box-shadow: 0 0 0 2px rgba(255, 107, 158, 0.3);
+}
+
+.fileInput {
+  margin-bottom: 1.5rem;
+  width: 100%;
+  color: #d0d0d0;
+}
+
+.fileInput::file-selector-button {
+  padding: 0.75rem 1.25rem;
+  background: #3a3a3a;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.fileInput::file-selector-button:hover {
+  background: #ee10b0;
+  color: #1a1a1a;
+}
+
+.button {
+  background: linear-gradient(135deg, #ee10b0 0%, #ee10b0 100%);
+  color: #1a1a1a;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(255, 107, 158, 0.2);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 107, 158, 0.3);
+}
+
+.button:disabled {
+  background: #3a3a3a;
+  color: #6a6a6a;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.error {
+  color: #ee10b0;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #ee10b0;
+  font-size: 0.95rem;
+}

@@ -1,0 +1,407 @@
+.settingsContainer {
+    background-color: #181818;
+    color: white;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  
+  .settingsHeader {
+    color: #EE10B0;
+    margin-bottom: 2rem;
+  }
+  
+  .sectionsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .sectionCard {
+    background-color: #222;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .sectionCard.expanded {
+    box-shadow: 0 0 0 2px #EE10B0;
+  }
+  
+  .sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .sectionTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  
+  .sectionIcon {
+    color: #EE10B0;
+  }
+  
+  .sectionContent {
+    padding: 1.25rem;
+    border-top: 1px solid #333;
+  }
+  
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .formLabel {
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  .formInput {
+    background-color: #333;
+    border: 1px solid #444;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .formInput:focus {
+    outline: none;
+    border-color: #EE10B0;
+    box-shadow: 0 0 0 2px rgba(238, 16, 176, 0.25);
+  }
+  
+  .saveButton {
+    background-color: #EE10B0;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background-color 0.2s;
+  }
+  
+  .saveButton:hover {
+    background-color: #d40f9d;
+  }
+
+
+
+
+
+  /* Profile Image Styles */
+.profileImageContainer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #EE10B0;
+    overflow: hidden;
+  }
+  
+  .uploadControls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+  }
+  
+  .fileInput {
+    display: none;
+  }
+  
+  .uploadButton {
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+    
+    
+  }
+  
+  .uploadButton:hover {
+    background-color: #444;
+  }
+  
+  /* Progress Bar */
+  .progressBar {
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .progressFill {
+    height: 100%;
+    background-color: #EE10B0;
+    transition: width 0.3s ease;
+  }
+  
+  /* Bio Textarea */
+  .bioInput {
+    min-height: 100px;
+    resize: vertical;
+  }
+  
+  /* Save Button States */
+  .saveButton:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+  
+  .spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+
+
+
+  /* Account Content Specific Styles */
+.securitySection {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+
+
+/* Warning Text */
+.warningText {
+  color: #ff6b6b;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Delete Button */
+.deleteButton {
+  background-color: transparent;
+  border: 1px solid #ff4d4d;
+  color: #ff4d4d;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.deleteButton:hover {
+  background-color: rgba(255, 77, 77, 0.1);
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  border: 1px solid #ff4d4d;
+}
+
+.warningList {
+  color: #ff6b6b;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.warningList li {
+  margin-bottom: 0.5rem;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.cancelButton {
+  flex: 1;
+  background-color: #333;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirmDeleteButton {
+  flex: 1;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+
+
+/* Payments Specific Styles */
+.paymentSection {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.toggleOption {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.75rem;
+}
+
+.toggleInput {
+  position: absolute;
+  opacity: 0;
+}
+
+.toggleSlider {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  background-color: #333;
+  border-radius: 34px;
+  transition: .4s;
+}
+
+.toggleSlider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.toggleInput:checked + .toggleSlider {
+  background-color: #EE10B0;
+}
+
+.toggleInput:checked + .toggleSlider:before {
+  transform: translateX(26px);
+}
+
+
+
+/* Support Content Specific Styles */
+.supportSection {
+  margin-bottom: 2rem;
+}
+
+.supportSection h3 {
+  color: #EE10B0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.supportOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.optionCard {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.optionCard:hover {
+  border-color: #444;
+  transform: translateY(-2px);
+}
+
+.optionCard h4 {
+  color: white;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.optionCard p {
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.supportButton {
+  background-color: transparent;
+  color: #EE10B0;
+  border: 1px solid #EE10B0;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.supportButton:hover {
+  background-color: rgba(238, 16, 176, 0.1);
+}

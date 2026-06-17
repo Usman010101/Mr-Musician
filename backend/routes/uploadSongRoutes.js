@@ -6,6 +6,6 @@ import {verifyToken} from '../middlewares/auth.js';
 const router = express.Router();
 
 // Route for uploading both song and image in one request
-router.post('/song/:artistId',uploadFiles, uploadSong);
+router.post('/song/:albumId',verifyToken,uploadFiles, uploadSong);
 
 export default router;

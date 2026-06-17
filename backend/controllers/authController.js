@@ -61,13 +61,14 @@ export const registerUser = async (req, res) => {
 // Login for Listener or Artist
 export const loginUser = async (req, res) => {
   const { email, password } = req.body; // Only email and password are needed
-
+  console.log("Email:", email)
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
 
   try {
     let user = await Listener.findOne({ email });
+    console.log("User:", user)
     if (!user) user = await Artist.findOne({ email });
     if (!user) user = await Admin.findOne({ email });
 
@@ -84,7 +85,7 @@ export const loginUser = async (req, res) => {
 
     // Create JWT token with the user's ID and type
     const token = jwt.sign(
-      { userId: user._id, userType: user.constructor.modelName }, // Payload with user ID and type
+      { userId: user._id, userType: user.constructor.modelName.toLowerCase() }, // Payload with user ID and type
       process.env.JWT_SECRET_KEY, // Secret key from environment variables
       { expiresIn: '1h' } // Token expiration time
     );
@@ -94,25 +95,17 @@ export const loginUser = async (req, res) => {
       httpOnly: true,
       secure: false,  // Ensure this is false for localhost
       maxAge: 3600000,
-      sameSite: 'None', // Make sure cookies are allowed across origins
+      sameSite: 'lax', // Make sure cookies are allowed across origins
     });
     
     
-
-    // Return the user type in the response as before
-    if (user instanceof Listener) {
-      return res.status(200).json({ message: "Login successful", userType: "listener" });
-    } else if (user instanceof Artist) {
-      return res.status(200).json({ message: "Login successful", userType: "artist" });
-    } else if (user instanceof Admin) {
-      return res.status(200).json({ message: "Login successful", userType: "admin" });
-    }
-
-    res.status(500).json({ message: "Error determining user role" });
+    return res.status(200).json({ message: "Login successful",userType: user.constructor.modelName.toLowerCase() });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
+
 
   

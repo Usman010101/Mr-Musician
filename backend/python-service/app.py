@@ -1,122 +1,163 @@
-# backend/python-service/app.py
 import librosa
-import numpy as np
-import librosa.display  # For visualizing audio and spectrogram
+import librosa.display
 import matplotlib.pyplot as plt
+import numpy as np
+import hashlib
 from flask import Flask, request, jsonify
-import tempfile
-import os
-from flask_cors import CORS
+from io import BytesIO
+import logging
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for cross-origin requests
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-def generate_fingerprint(audio_path):
-    try:
-        print(f"Processing file: {audio_path}")
+# Configuration
+CHROMA_BINS = 12
+HOP_LENGTH = 512
+SAMPLE_RATE = 22050
+TIME_WINDOW = 1.5
+DELTA_PRECISION = 1
+PEAK_THRESHOLD = 0.6
+MAX_HASHES = 2000
 
-        # Step 1: Load audio
-        y, sr = librosa.load(
-            audio_path,
-            sr=22050,  # Fixed sampling rate
-            mono=True,
-            res_type='kaiser_fast'
-        )
-        print(f"Audio loaded successfully! Sample Rate: {sr}, Shape of y: {y.shape}")
+def generate_hashes(peaks):
+    """Generate complete fingerprints with all required fields"""
+    fingerprints = []
+    seen_hashes = set()
+    
+    for i in range(len(peaks)):
+        anchor_time, anchor_bin = peaks[i]
         
-        # Visualize waveform
-        import matplotlib.pyplot as plt
-        plt.figure(figsize=(10, 4))
-        librosa.display.waveshow(y, sr=sr)
-        plt.title("Waveform")
-        plt.xlabel("Time (s)")
-        plt.ylabel("Amplitude")
-        plt.show()
-
-        # Step 2: Compute Short-Time Fourier Transform (STFT)
-        stft = librosa.stft(y)
-        print("Stft:",stft)
-        spectrogram = np.abs(stft)
-        print(f"Spectrogram Shape: {spectrogram.shape}")
-
-        # Visualize spectrogram
-        plt.figure(figsize=(10, 4))
-        librosa.display.specshow(
-            librosa.amplitude_to_db(spectrogram, ref=np.max),
-            sr=sr,
-            x_axis="time",
-            y_axis="log"
-        )
-        plt.title("Log-Scaled Spectrogram")
-        plt.colorbar(format="%+2.0f dB")
-        plt.show()
-
-        # Step 3: Peak Detection
-        peaks = librosa.util.peak_pick(
-            spectrogram.flatten(),
-            pre_max=3,
-            post_max=3,
-            pre_avg=3,
-            post_avg=5,
-            delta=0.5,
-            wait=10
-        )
-        print(f"Number of Peaks Detected: {len(peaks)}")
-
-        # Step 4: Map Peaks to Time-Frequency Pairs
-        time_freq_pairs = [
-            [
-                int(idx // spectrogram.shape[0]),  # Time index
-                int(idx % spectrogram.shape[0])    # Frequency index
-            ] for idx in peaks
-        ]
-        print(f"Time-Frequency Pairs (First 10): {time_freq_pairs[:10]}")
-
-        return time_freq_pairs
-
-    except Exception as e:
-        print(f"Audio processing error: {str(e)}")
-        return None
-
-@app.route('/fingerprint', methods=['POST'])
-def handle_fingerprint():
-    if 'file' not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
-    
-    audio_file = request.files['file']
-    temp_path = None
-    
-    try:
-        # 5. Secure temporary file handling
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp:
-            temp_path = tmp.name
-            audio_file.save(temp_path)
+        for j in range(i+1, min(i+20, len(peaks))):
+            target_time, target_bin = peaks[j]
             
-            fingerprint = generate_fingerprint(temp_path)
+            # Calculate values with full precision first
+            raw_delta = target_time - anchor_time
             
-            if not fingerprint:
-                return jsonify({"error": "Fingerprint generation failed"}), 500
+            # Apply final rounding for output
+            delta = round(raw_delta, DELTA_PRECISION)
+            time = round(anchor_time, DELTA_PRECISION)
+            
+            # Validate after rounding
+            if delta <= 0 or delta > TIME_WINDOW:
+                continue
                 
-            return jsonify({
-                "status": "success",
-                "fingerprint": fingerprint,
-                "length": len(fingerprint)
-            })
+            # Create complete fingerprint object
+            fingerprint = {
+                "bins": [int(anchor_bin), int(target_bin)],
+                "delta": delta,
+                "time": time,
+                "hash": None  # Initialize hash field
+            }
             
-    except Exception as e:
-        print(f"Server error: {str(e)}")
-        return jsonify({"error": "Internal server error"}), 500
+            # Generate hash from visible values
+            hash_str = f"{fingerprint['bins'][0]}|{fingerprint['bins'][1]}|{delta}|{time}"
+            fingerprint["hash"] = hashlib.md5(hash_str.encode()).hexdigest()[:12]
+            
+            if fingerprint["hash"] not in seen_hashes:
+                fingerprints.append(fingerprint)
+                seen_hashes.add(fingerprint["hash"])
+                
+            if len(fingerprints) >= MAX_HASHES:
+                return fingerprints
+    return fingerprints
+
+def process_audio(file_data):
+    """Audio processing pipeline with debug logging"""
+    try:
+        y, sr = librosa.load(
+            BytesIO(file_data),
+            sr=SAMPLE_RATE,
+            mono=True,
+            res_type='kaiser_fast',
+            duration=300
+        )
+
+        print("Waveform (y):", y[:10])  # Print the first 10 samples for simplicity
+        print("Sample rate (sr):", sr)
         
-    finally:
-        # 6. Guaranteed cleanup
-        if temp_path and os.path.exists(temp_path):
-            os.remove(temp_path)
+        chroma = librosa.feature.chroma_cqt(
+            y=y,
+            sr=sr,
+            hop_length=HOP_LENGTH,
+            bins_per_octave=36
+        )
+        print("Chroma matrix shape:", chroma.shape) 
+        print("First 5 Chroma columns:\n", chroma[:, :5])
+        
+        # Generate peaks with precise timing
+        peaks = []
+        for time_idx in range(chroma.shape[1]):
+            frame = chroma[:, time_idx]
+            bin_idx = np.argmax(frame)
+            if frame[bin_idx] > PEAK_THRESHOLD:
+                precise_time = time_idx * HOP_LENGTH / SAMPLE_RATE
+                peaks.append((precise_time, int(bin_idx)))
+        
+        fingerprints = generate_hashes(peaks)
+        
+        # Debug: Verify first fingerprint format
+        if fingerprints:
+            logger.info(f"Sample fingerprint: {fingerprints[0]}")
+        
+        return {
+            "success": True,
+            "duration": round(librosa.get_duration(y=y, sr=sr), 1),
+            "fingerprints": fingerprints,
+            "hash_count": len(fingerprints)
+        }
+        
+    except Exception as e:
+        logger.error(f"Processing error: {str(e)}")
+        return {"success": False, "error": str(e)}
+
+@app.route('/detect', methods=['POST'])
+def handle_detection():
+    try:
+        if 'file' not in request.files:
+            return jsonify({"success": False, "error": "No file uploaded"}), 400
+            
+        file = request.files['file']
+        audio_data = file.read()
+        
+        result = process_audio(audio_data)
+        if not result['success']:
+            return jsonify(result), 400
+            
+        # Return data in format matching database structure
+        return jsonify({
+            "success": True,
+            "hashes": [fp["hash"] for fp in result["fingerprints"]],
+            "timing_data": [{
+                "hash": fp["hash"],
+                "sample_time": fp["time"]
+            } for fp in result["fingerprints"]],
+            "duration": result["duration"]
+        })
+        
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/process', methods=['POST'])
+def handle_upload():
+    try:
+        if 'song' not in request.files:
+            return jsonify({"success": False, "error": "Missing 'song' field"}), 400
+            
+        file = request.files['song']
+        if not file or file.filename == '':
+            return jsonify({"success": False, "error": "Empty filename"}), 400
+            
+        audio_data = file.read()
+        result = process_audio(audio_data)
+        
+        if result['success']:
+            return jsonify(result)
+        return jsonify(result), 400
+        
+    except Exception as e:
+        logger.error(f"Upload error: {str(e)}")
+        return jsonify({"success": False, "error": "Upload failed"}), 500
 
 if __name__ == '__main__':
-    # 7. Production-ready configuration
-    app.run(
-        host='0.0.0.0',
-        port=8080,
-        threaded=True,  # Handle concurrent requests
-        debug=False    # Disable in production
-    )
+    app.run(host='0.0.0.0', port=8080, threaded=True)

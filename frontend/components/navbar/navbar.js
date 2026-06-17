@@ -32,22 +32,7 @@
                     </div>
 
                     {/* Authentication Buttons */}
-                    <div className="d-flex align-items-center justify-content-end" style={{ flexGrow: "1", flexWrap: "nowrap" }}>
-                        {!isAuthenticated ? (
-                            <>
-                                <Button className="btn-outline-pink fw-bold mx-2" style={{ fontSize: "14px", padding: "6px 12px" }}>
-                                    Login
-                                </Button>
-                                <Button className="btn-pink fw-bold mx-2" style={{ fontSize: "14px", padding: "6px 12px" }}>
-                                    Sign Up
-                                </Button>
-                            </>
-                        ) : (
-                            <Button className="btn-pink fw-bold mx-2" style={{ fontSize: "14px", padding: "6px 12px" }}>
-                                Logout
-                            </Button>
-                        )}
-                    </div>
+                    
                 </div>
             </nav>
         );
